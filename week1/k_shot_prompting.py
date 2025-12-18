@@ -7,7 +7,26 @@ load_dotenv()
 NUM_RUNS_TIMES = 5
 
 # TODO: Fill this in!
-YOUR_SYSTEM_PROMPT = ""
+# k shot은 지시와 함께 n개의 예시를 제공하는 것이다.
+YOUR_SYSTEM_PROMPT = """
+    You're a senior python developer who makes algorithms.
+    Reverse the order of letters in the following word. I give you examples.
+    
+    example word: "httpstatus"
+    result reversed word: "sutatsptth"
+
+    example word: "success"
+    result reversed word: "sseccus"
+    
+    example word: "hello world!"
+    result reversed word: "!dlrow olleh"
+
+    example word: "!@#$%^"
+    result reversed word: "^%$#@!"
+
+    example word: "Nintendo Switch! good!"
+    result reversed word: "!doog !hctiwS odnetniN"
+"""
 
 USER_PROMPT = """
 Reverse the order of letters in the following word. Only output the reversed word, no other text:

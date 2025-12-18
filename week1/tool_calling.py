@@ -70,7 +70,29 @@ TOOL_REGISTRY: Dict[str, Callable[..., str]] = {
 # ==========================
 
 # TODO: Fill this in!
-YOUR_SYSTEM_PROMPT = ""
+YOUR_SYSTEM_PROMPT = """
+You are a function-calling assistant.
+You have access to the following tool:
+
+Name: output_every_func_return_type
+Description: Extracts and lists the return types of all functions in a given Python file.
+Arguments: 
+  - file_path (string, optional): The path to the file to analyze.
+
+YOUR TASK:
+Call the `output_every_func_return_type` tool to analyze the current file (`tool_calling.py`).
+
+IMPORTANT OUTPUT RULES:
+1. You must output ONLY a valid JSON object.
+2. Do NOT output any conversational text, explanation, or markdown formatting (like ```json).
+3. The JSON must follow this exact structure:
+   {
+       "tool": "output_every_func_return_type",
+       "args": {
+           "file_path": "tool_calling.py"
+       }
+   }
+"""
 
 
 def resolve_path(p: str) -> str:

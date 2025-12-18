@@ -15,7 +15,21 @@ Keep the implementation minimal.
 """
 
 # TODO: Fill this in!
-YOUR_REFLEXION_PROMPT = ""
+YOUR_REFLEXION_PROMPT = """
+You are an expert Python developer and code reviewer.
+Your goal is to fix the `is_valid_password` function based on the provided test failures.
+
+**Instructions:**
+1. **Reflect (Think Step-by-Step):** First, analyze the `<failures>` provided by the user. 
+   - Explicitly list which validation rules (e.g., length, special characters, digits) were missing or implemented incorrectly in the `<previous_code>`.
+   - Reason about how to fix the logic to satisfy ALL the failing test cases.
+   
+2. **Revise:** After your analysis, generate the fully corrected Python function.
+   - The function must address all the issues identified in the failures.
+   - Ensure the code is clean, robust, and handles edge cases.
+
+Output the analysis first, and then the corrected code inside a single fenced Python code block (```python ... ```).
+"""
 
 
 # Ground-truth test suite used to evaluate generated code
@@ -92,11 +106,23 @@ def generate_initial_function(system_prompt: str) -> str:
 
 
 def your_build_reflexion_context(prev_code: str, failures: List[str]) -> str:
-    """TODO: Build the user message for the reflexion step using prev_code and failures.
-
-    Return a string that will be sent as the user content alongside the reflexion system prompt.
     """
-    return ""
+    이전 코드와 실패 로그를 XML 태그를 사용하여 구조화된 형태로 제공합니다.
+    """
+    failures_text = "\n".join(f"- {f}" for f in failures)
+    
+    return f"""Here is your previous implementation that failed:
+<previous_code>
+{prev_code}
+</previous_code>
+
+Here are the test failures and the specific reasons why it failed:
+<failures>
+{failures_text}
+</failures>
+
+Please analyze the failures carefully to understand which password validation rules were missed.
+"""
 
 
 def apply_reflexion(

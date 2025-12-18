@@ -8,7 +8,18 @@ load_dotenv()
 NUM_RUNS_TIMES = 5
 
 # TODO: Fill this in!
-YOUR_SYSTEM_PROMPT = ""
+# CoT는 추론 단계를 보여주는 것이 핵심!
+YOUR_SYSTEM_PROMPT = """
+You are a problem solver who uses code to solve problems.
+
+I solve the math problems. Please solve the problem by referring to what I have presented:
+1. Show me the reasoning steps.
+2. Use python code.
+
+Solve this problem, then give the final answer on the last line as "Answer: <number>".
+
+what is 3^{12345} (mod 100)?
+"""
 
 
 USER_PROMPT = """

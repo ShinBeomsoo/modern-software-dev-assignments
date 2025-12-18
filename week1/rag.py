@@ -37,7 +37,18 @@ QUESTION = (
 
 
 # TODO: Fill this in!
-YOUR_SYSTEM_PROMPT = ""
+YOUR_SYSTEM_PROMPT = """
+You are a Python coding assistant specializing in API integration.
+Your task is to write a Python function based **ONLY** on the provided Context documentation.
+
+**Crucial Guidelines:**
+1. **Strict Adherence:** Do not use any external knowledge about generic API patterns. Use ONLY the endpoints, headers, and authentication methods described in the Context.
+2. **Library:** Use the `requests` library for HTTP calls.
+3. **Error Handling:** As per the requirements, ensure you raise exceptions for non-200 status codes.
+4. **Format:** Output only the executable Python code block containing the function and necessary imports.
+
+Remember: If it's not in the Context, it doesn't exist.
+"""
 
 
 # For this simple example
@@ -56,7 +67,7 @@ def YOUR_CONTEXT_PROVIDER(corpus: List[str]) -> List[str]:
 
     For example, return [] to simulate missing context, or [corpus[0]] to include the API docs.
     """
-    return []
+    return corpus 
 
 
 def make_user_prompt(question: str, context_docs: List[str]) -> str:

@@ -9,7 +9,12 @@ load_dotenv()
 NUM_RUNS_TIMES = 5
 
 # TODO: Fill this in! Try to get as close to 100% correctness across all runs as possible.
-YOUR_SYSTEM_PROMPT = ""
+# 모델에게 여러번 답을 생성하여 오답을 줄이는 방법이다.
+YOUR_SYSTEM_PROMPT = """
+You are an excellent problem-solving secretary.
+When I present a problem, you must solve it by breaking it down into several problems and solving them one by one.
+Use python code and then find the answer to the problem.
+"""
 
 USER_PROMPT = """
 Solve this problem, then give the final answer on the last line as "Answer: <number>".
