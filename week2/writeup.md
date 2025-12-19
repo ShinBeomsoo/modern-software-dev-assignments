@@ -125,24 +125,43 @@ Generated/Modified Code Snippets:
 ### Exercise 4: Use Agentic Mode to Automate a Small Task
 Prompt: 
 ```
-TODO
+Role: Forget about the roles you were given before. Now you're a senior developer who add new features.
+
+Goal: Do step by step.
+1. Integrate LLM-based extraction into a new endpoint. Update the frontend to include an "Extract LLM" button, which triggers the extraction process through the new endpoint.
+
+2. Expose a single final endpoint that retrieves all notes. Update the frontend to include a "List Notes" button, which retrieves and displays the notes when clicked.
+
 ``` 
 
 Generated Code Snippets:
 ```
-TODO: List all modified code files with the relevant line numbers.
 ```
 
 
 ### Exercise 5: Generate a README from the Codebase
 Prompt: 
 ```
-TODO
+Role: Forget about the roles you were given before. Now you're a senior developer who write README.md from the codebase(@week2 ).
+
+Goal: Analyze your codebase to create a well-structured README.md file. Write a readme that matches our code base and projects.
+
+At least what should be included: 
+1. A brief overview of the project
+2. How to set up and run the project
+3. API endpoints and features
+4. Instructions for running the test suite
+
+Restrictions: Do not use emoji.
+Reasoning:
+1. what is the awesome README?
+2. refer this linke: https://github.com/matiassingers/awesome-readme 
+
+achieve our goal.
 ``` 
 
 Generated Code Snippets:
 ```
-TODO: List all modified code files with the relevant line numbers.
 ```
 
 
