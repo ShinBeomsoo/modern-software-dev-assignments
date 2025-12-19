@@ -1,34 +1,36 @@
 from __future__ import annotations
 
-from typing import Any, Dict, List
+from typing import List
 
 from fastapi import APIRouter, HTTPException
 
-from .. import db
+from .. import db, schemas
 
 
 router = APIRouter(prefix="/notes", tags=["notes"])
 
 
-@router.post("")
-def create_note(payload: Dict[str, Any]) -> Dict[str, Any]:
-    content = str(payload.get("content", "")).strip()
+@router.post("", response_model=schemas.Note)
+def create_note(payload: schemas.NoteCreate) -> schemas.Note:
+    content = payload.content.strip()
     if not content:
-        raise HTTPException(status_code=400, detail="content is required")
+        raise HTTPException(status_code=400, detail="Content cannot be empty")
+    
     note_id = db.insert_note(content)
-    note = db.get_note(note_id)
-    return {
-        "id": note["id"],
-        "content": note["content"],
-        "created_at": note["created_at"],
-    }
+    note_row = db.get_note(note_id)
+    
+    if not note_row:
+        raise HTTPException(status_code=500, detail="Failed to retrieve created note")
+    
+    return schemas.Note.model_validate(dict(note_row))
 
 
-@router.get("/{note_id}")
-def get_single_note(note_id: int) -> Dict[str, Any]:
+@router.get("/{note_id}", response_model=schemas.Note)
+def get_single_note(note_id: int) -> schemas.Note:
     row = db.get_note(note_id)
     if row is None:
-        raise HTTPException(status_code=404, detail="note not found")
-    return {"id": row["id"], "content": row["content"], "created_at": row["created_at"]}
+        raise HTTPException(status_code=404, detail="Note not found")
+    
+    return schemas.Note.model_validate(dict(row))
 
 

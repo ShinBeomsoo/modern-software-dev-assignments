@@ -1,22 +1,26 @@
-from __future__ import annotations
-
+from contextlib import asynccontextmanager
 from pathlib import Path
-from typing import Any, Dict, Optional
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 
-from .db import init_db
-from .routers import action_items, notes
 from . import db
-
-init_db()
-
-app = FastAPI(title="Action Item Extractor")
+from .routers import action_items, notes
 
 
-@app.get("/", response_class=HTMLResponse)
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    db.init_db()
+    yield
+
+app = FastAPI(
+    title="Action Item Extractor",
+    lifespan=lifespan,
+)
+
+
+@app.get("/", response_class=HTMLResponse, tags=["ui"])
 def index() -> str:
     html_path = Path(__file__).resolve().parents[1] / "frontend" / "index.html"
     return html_path.read_text(encoding="utf-8")

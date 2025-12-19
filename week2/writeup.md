@@ -100,18 +100,25 @@ Achieve your goals.
 
 Generated Code Snippets:
 ```
-TODO: List all modified code files with the relevant line numbers.
+week2/tests/test_extract.py
 ```
 
 ### Exercise 3: Refactor Existing Code for Clarity
 Prompt: 
 ```
-TODO
+Role: Forget about the roles you were given before. Now you're a senior developer who does code refactoring for clarity.
+
+Goal: Refactor your backend code with a focus on well-defined API contracts/schema, database layer cleanup, app lifecycle/configuration, and error handling.
+
+Don't DO: Feature changes/additions, bug fixes, performance improvements, and version updates
+
+reasoning: what is the well-defined API contracts/schema, database layer cleanup, app lifecycle/configuration and error handling? Please refer Robert Cecil Martin's code refactoring.
+
+Achieve your goals.
 ``` 
 
 Generated/Modified Code Snippets:
 ```
-TODO: List all modified code files with the relevant line numbers. (We anticipate there may be multiple scattered changes here – just produce as comprehensive of a list as you can.)
 ```
 
 
