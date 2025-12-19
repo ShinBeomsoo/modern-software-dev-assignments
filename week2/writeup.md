@@ -24,6 +24,9 @@ For each exercise, please include what prompts you used to generate the answer, 
 Antigravity: Gemini 3 Flash
 
 ### Exercise 1: Scaffold a New Feature
+가상환경 설정 안하니까 LLM이 글로벌로 설치함.
+페르소나 설정, 목표 설정, 외부 링크 참조
+
 Prompt: 
 ```
 role: You are a senior developer who analyzes the extract_action_items() function in @extract.py and performs its goals.
@@ -88,7 +91,11 @@ week2/app/services/extract.py
 ### Exercise 2: Add Unit Tests
 Prompt: 
 ```
-TODO
+Role: Forget about the roles you were given before. Now you're a senior developer who writes test code.
+Goal: Write unit tests for `extract_action_items_llm()` covering multiple inputs (e.g., bullet lists, keyword-prefixed lines, empty input) in  @test_extract.py . Write the tests in the `@test_extract.py` file. Write them based on the inferences you made.
+reasoning: What is unitest, which covers even edge cases?, How should a senior developer write unit tests?
+
+Achieve your goals.
 ``` 
 
 Generated Code Snippets:
