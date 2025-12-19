@@ -21,12 +21,31 @@ def extract(payload: schemas.ExtractRequest) -> schemas.ExtractResponse:
     if payload.save_note:
         note_id = db.insert_note(text)
 
-    # Use LLM extractor if available or fallback to classic one
-    # Note: For now keeping it simple, but this is where strategy could go
+    # Use classic rule-based extraction
+    items = extract_action_items(text)
+    ids = db.insert_action_items(items, note_id=note_id)
+    
+    summaries = [
+        schemas.ActionItemSummary(id=i, text=t) 
+        for i, t in zip(ids, items)
+    ]
+    
+    return schemas.ExtractResponse(note_id=note_id, items=summaries)
+
+
+@router.post("/extract-llm", response_model=schemas.ExtractResponse)
+def extract_llm(payload: schemas.ExtractRequest) -> schemas.ExtractResponse:
+    text = payload.text.strip()
+    if not text:
+        raise HTTPException(status_code=400, detail="Text is required for extraction")
+
+    note_id: Optional[int] = None
+    if payload.save_note:
+        note_id = db.insert_note(text)
+
+    # Use LLM-based extraction
     items = extract_action_items_llm(text)
-    if not items: # Fallback if LLM fails or returns nothing
-        items = extract_action_items(text)
-        
+    # Note: No fallback here to clearly distinguish between the two
     ids = db.insert_action_items(items, note_id=note_id)
     
     summaries = [

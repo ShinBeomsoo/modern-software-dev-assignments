@@ -25,6 +25,12 @@ def create_note(payload: schemas.NoteCreate) -> schemas.Note:
     return schemas.Note.model_validate(dict(note_row))
 
 
+@router.get("", response_model=List[schemas.Note])
+def list_notes() -> List[schemas.Note]:
+    rows = db.list_notes()
+    return [schemas.Note.model_validate(dict(r)) for r in rows]
+
+
 @router.get("/{note_id}", response_model=schemas.Note)
 def get_single_note(note_id: int) -> schemas.Note:
     row = db.get_note(note_id)
