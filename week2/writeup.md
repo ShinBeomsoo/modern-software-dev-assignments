@@ -13,7 +13,7 @@ Name: **신범수** \
 SUNet ID: **ShinBeomsoo** ㅏ
 Citations: **None**
 
-This assignment took me about **TODO** hours to do. 
+This assignment took me about **0.5** hours to do. 
 
 
 ## YOUR RESPONSES
@@ -89,6 +89,8 @@ week2/app/services/extract.py
 ```
 
 ### Exercise 2: Add Unit Tests
+페르소나 설정, 목표 설정, 추론 설정
+
 Prompt: 
 ```
 Role: Forget about the roles you were given before. Now you're a senior developer who writes test code.
@@ -104,6 +106,8 @@ week2/tests/test_extract.py
 ```
 
 ### Exercise 3: Refactor Existing Code for Clarity
+페르소나 설정, 목표 설정, 추론 설정, 제한 설정
+
 Prompt: 
 ```
 Role: Forget about the roles you were given before. Now you're a senior developer who does code refactoring for clarity.
@@ -123,6 +127,8 @@ Generated/Modified Code Snippets:
 
 
 ### Exercise 4: Use Agentic Mode to Automate a Small Task
+페르소나 설정, 목표 설정
+
 Prompt: 
 ```
 Role: Forget about the roles you were given before. Now you're a senior developer who add new features.
@@ -140,6 +146,8 @@ Generated Code Snippets:
 
 
 ### Exercise 5: Generate a README from the Codebase
+페르소나 설정, 목표 설정, 제한사항 설정, 반드시 할 것 설정, 추론 설정
+
 Prompt: 
 ```
 Role: Forget about the roles you were given before. Now you're a senior developer who write README.md from the codebase(@week2 ).
