@@ -38,6 +38,8 @@ As you work through the assignment, use `writeup.md` to document your progress. 
 
 ### TODO 1: Scaffold a New Feature
 
+-> 가상환경 설정안하니까 가상환경 상관없이 그냥 설치함.
+
 Analyze the existing `extract_action_items()` function in `week2/app/services/extract.py`, which currently extracts action items using predefined heuristics.
 
 Your task is to implement an **LLM-powered** alternative, `extract_action_items_llm()`, that utilizes Ollama to perform action item extraction via a large language model.

@@ -6,6 +6,7 @@ from typing import List
 import json
 from typing import Any
 from ollama import chat
+from pydantic import BaseModel
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -16,6 +17,10 @@ KEYWORD_PREFIXES = (
     "action:",
     "next:",
 )
+
+
+class ActionItems(BaseModel):
+    items: List[str]
 
 
 def _is_action_line(line: str) -> bool:
@@ -87,3 +92,30 @@ def _looks_imperative(sentence: str) -> bool:
         "investigate",
     }
     return first.lower() in imperative_starters
+
+
+def extract_action_items_llm(text: str) -> List[str]:
+    """
+    Extracts action items from text using LLM (Ollama).
+    """
+    if not text.strip():
+        return []
+
+    response = chat(
+        messages=[
+            {
+                'role': 'user',
+                'content': f"Extract all action items, tasks, and next steps from the following text. Include explicit tasks and those implied in the conversation. Return them as a list of clear, concise strings:\n\n{text}",
+            }
+        ],
+        model='mistral-nemo:12b',
+        format=ActionItems.model_json_schema(),
+    )
+
+    try:
+        action_items = ActionItems.model_validate_json(response.message.content)
+        return action_items.items
+    except Exception as e:
+        # Fallback to empty list or handle error appropriately
+        print(f"Error parsing LLM response: {e}")
+        return []
